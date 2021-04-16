@@ -80,7 +80,7 @@
     }
     .login-wrap{
         position: relative;
-        background: url("/static/img/hitsz.jpg") no-repeat center;
+        background: url("/static/img/bg.jpg") no-repeat center;
         width:100%;
         height:100%;
     }

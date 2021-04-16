@@ -35,6 +35,7 @@ def login_login():
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
+        print(username, password)
         cursor.execute("select U_ID, U_NAME from user where U_NAME=\""
                        +str(username)+"\" and U_PASSWORD=\""+str(password)+"\"")
         data = cursor.fetchone()

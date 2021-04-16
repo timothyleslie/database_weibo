@@ -27,7 +27,7 @@
                     [
                         {
                             icon: 'el-icon-setting',
-                            index: 'account_admin',
+                            index: 'favorite_admin',
                             title: '用户管理',
                         },
                         {
