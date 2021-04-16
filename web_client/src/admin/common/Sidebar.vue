@@ -34,6 +34,16 @@
                             icon: 'el-icon-setting',
                             index: 'favorite_admin',
                             title: '收藏管理',
+                        },
+                        {
+                            icon: 'el-icon-setting',
+                            index: 'article_admin',
+                            title: '微博管理',
+                        },
+                        {
+                            icon: 'el-icon-setting',
+                            index: 'browse',
+                            title: '微博浏览',
                         }
                     ]
             }

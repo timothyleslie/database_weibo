@@ -28,6 +28,14 @@ export default new Router({
                 {
                     path: '/favorite_admin',
                     component: resolve => require(['../admin/page/favorite_admin.vue'], resolve)
+                },
+                {
+                    path: '/article_admin',
+                    component: resolve => require(['../admin/page/article_admin.vue'], resolve)
+                },
+                {
+                    path: '/browse',
+                    component: resolve => require(['../admin/page/browse.vue'], resolve)
                 }
             ]
         }

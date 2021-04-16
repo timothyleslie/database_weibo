@@ -40,7 +40,7 @@ module.exports = {
                 changeOrigin: true
             },
             '/ws': {
-                target: 'http://localhost:9081',
+                target: 'http://localhost:3000',
                 changeOrigin: true,
                 pathRewrite: {
                     '/ws': ''
