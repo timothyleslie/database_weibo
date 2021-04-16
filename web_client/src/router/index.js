@@ -17,6 +17,7 @@ export default new Router({
             path: '/register',
             component: resolve => require(['../register.vue'], resolve)
         },
+
         {
             path: '/admin',
             component: resolve => require(['../admin/common/Home.vue'], resolve),
@@ -40,7 +41,23 @@ export default new Router({
                 {
                     path: '/fav_admin',
                     component: resolve => require(['../admin/page/fav_admin.vue'], resolve)
-                }
+                },
+                {
+                    path: '/comment',
+                    component: resolve => require(['../admin/page/comment.vue'], resolve)
+                },
+                {
+                    path: '/focus_admin',
+                    component: resolve => require(['../admin/page/focus_admin.vue'], resolve)
+                },
+                {
+                    path: '/my_focus',
+                    component: resolve => require(['../admin/page/my_focus.vue'], resolve)
+                },
+                {
+                    path: '/private_message',
+                    component: resolve => require(['../admin/page/private_message.vue'], resolve)
+                },
             ]
         }
     ]

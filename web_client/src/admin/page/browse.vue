@@ -180,6 +180,25 @@ export default {
                     this.init();
                 }
             );
+        },
+        transmit(row){
+            this.$http.post(main.url+"/article/transmit",
+                {  'uid': localStorage.getItem('id'),
+                    'aid': row.id,},
+                {
+                    headers: {'Content-Type':'application/x-www-form-urlencoded'},
+                    emulateJSON: true
+                }).then(
+                success=> {
+                    this.$message({type: 'success', message: '已收藏'});
+                    this.init();
+                }
+            );
+        },
+        comment(row)
+        {
+            localStorage.setItem('article_id', row.id);
+            this.$router.push({ path: '/comment' })
         }
     }
 }

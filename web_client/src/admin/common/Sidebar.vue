@@ -49,6 +49,21 @@
                             icon: 'el-icon-setting',
                             index: 'fav_admin',
                             title: '我的收藏',
+                        },
+                        {
+                            icon: 'el-icon-setting',
+                            index: 'focus_admin',
+                            title: '管理关注',
+                        },
+                        {
+                            icon: 'el-icon-setting',
+                            index: 'my_focus',
+                            title: '我的关注',
+                        },
+                        {
+                            icon: 'el-icon-setting',
+                            index: 'private_message',
+                            title: '私信',
                         }
                     ]
             }
