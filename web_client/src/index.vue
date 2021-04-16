@@ -17,6 +17,8 @@
             </el-table>
         </div>
         <el-button type="primary" @click="submit()" >登录</el-button>
+        <el-button type="primary" @click="register()" >注册</el-button>
+
     </div>
 </template>
 
@@ -60,6 +62,9 @@
             },
             submit(){
                 this.$router.push({ path: '/login' });
+            },
+            register(){
+                this.$router.push({ path: '/register' });
             }
         }
     }
@@ -75,7 +80,7 @@
     }
     .login-wrap{
         position: relative;
-        background: url("/static/img/bg.jpg") no-repeat center;
+        background: url("/static/img/hitsz.jpg") no-repeat center;
         width:100%;
         height:100%;
     }

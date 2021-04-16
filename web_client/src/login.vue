@@ -52,12 +52,12 @@
                 }else if(this.ruleForm.password===""){
                     this.$message({type: 'info', message: '密码必须输入！'});
                 }else{
-                    // let crypto = require('crypto');
-                    // const md5 = crypto.createHash('md5');
-                    // md5.update(this.ruleForm.password);
-                    // let md5password = md5.digest('hex');
+                    let crypto = require('crypto');
+                    const md5 = crypto.createHash('md5');
+                    md5.update(this.ruleForm.password);
+                    let md5password = md5.digest('hex');
                     this.$http.post(main.url+"/login/login",
-                        {'username': this.ruleForm.username, 'password': this.ruleForm.password},
+                        {'username': this.ruleForm.username, 'password': md5password},
                         {
                             headers: {'Content-Type':'application/x-www-form-urlencoded'},
                             emulateJSON: true

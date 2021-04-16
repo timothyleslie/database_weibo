@@ -14,6 +14,10 @@ export default new Router({
             component: resolve => require(['../login.vue'], resolve)
         },
         {
+            path: '/register',
+            component: resolve => require(['../register.vue'], resolve)
+        },
+        {
             path: '/admin',
             component: resolve => require(['../admin/common/Home.vue'], resolve),
             children:[
