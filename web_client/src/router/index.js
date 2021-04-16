@@ -25,10 +25,10 @@ export default new Router({
                     path: '/account_admin',
                     component: resolve => require(['../admin/page/account_admin.vue'], resolve)
                 },
-                {
-                    path: '/favorite_admin',
-                    component: resolve => require(['../admin/page/favorite_admin.vue'], resolve)
-                },
+                // {
+                //     path: '/favorite_admin',
+                //     component: resolve => require(['../admin/page/favorite_admin.vue'], resolve)
+                // },
                 {
                     path: '/article_admin',
                     component: resolve => require(['../admin/page/article_admin.vue'], resolve)
@@ -36,6 +36,10 @@ export default new Router({
                 {
                     path: '/browse',
                     component: resolve => require(['../admin/page/browse.vue'], resolve)
+                },
+                {
+                    path: '/fav_admin',
+                    component: resolve => require(['../admin/page/fav_admin.vue'], resolve)
                 }
             ]
         }

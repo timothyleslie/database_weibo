@@ -25,16 +25,16 @@
             return {
                 items:
                     [
-                        {
-                            icon: 'el-icon-setting',
-                            index: 'favorite_admin',
-                            title: '用户管理',
-                        },
-                        {
-                            icon: 'el-icon-setting',
-                            index: 'favorite_admin',
-                            title: '收藏管理',
-                        },
+                        // {
+                        //     icon: 'el-icon-setting',
+                        //     index: 'favorite_admin',
+                        //     title: '用户管理',
+                        // },
+                        // {
+                        //     icon: 'el-icon-setting',
+                        //     index: 'favorite_admin',
+                        //     title: '收藏管理',
+                        // },
                         {
                             icon: 'el-icon-setting',
                             index: 'article_admin',
@@ -44,6 +44,11 @@
                             icon: 'el-icon-setting',
                             index: 'browse',
                             title: '微博浏览',
+                        },
+                        {
+                            icon: 'el-icon-setting',
+                            index: 'fav_admin',
+                            title: '我的收藏',
                         }
                     ]
             }

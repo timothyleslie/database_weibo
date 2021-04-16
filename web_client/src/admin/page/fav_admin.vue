@@ -15,14 +15,14 @@
                 <el-table-column label="点赞数" prop="like_cnt" width="70px" ></el-table-column>
                 <el-table-column label="转发数" prop="transmit_cnt" width="70px" ></el-table-column>
                 <el-table-column label="评论数" prop="comment_cnt" width="70px" ></el-table-column>
-                <el-table-column>
-                    <template slot-scope="scope" width="100px">
-                        <el-button type="text" @click="like(scope.row)" >点赞</el-button>
-                        <el-button type="text" @click="favorite(scope.row)" >收藏</el-button>
-                        <el-button type="text" @click="transmit(scope.row)" >转发</el-button>
-                        <el-button type="text" @click="comment(scope.row)" >评论</el-button>
-                    </template>
-                </el-table-column>
+<!--                <el-table-column>-->
+<!--                    <template slot-scope="scope" width="100px">-->
+<!--                        <el-button type="text" @click="like(scope.row)" >点赞</el-button>-->
+<!--                        <el-button type="text" @click="favorite(scope.row)" >收藏</el-button>-->
+<!--                        <el-button type="text" @click="transmit(scope.row)" >转发</el-button>-->
+<!--                        <el-button type="text" @click="comment(scope.row)" >评论</el-button>-->
+<!--                    </template>-->
+<!--                </el-table-column>-->
             </el-table>
         </div>
         <el-dialog
@@ -79,8 +79,8 @@ export default {
     },
     methods:{
         init(){
-            this.$http.post(main.url+"/article/list",
-                {'uid': 0},
+            this.$http.post(main.url+"/favorite/list",
+                {'uid': localStorage.getItem('id')},
                 {
                     headers: {'Content-Type':'application/x-www-form-urlencoded'},
                     emulateJSON: true
@@ -154,21 +154,8 @@ export default {
             }
         },
         like(row){ //点赞
-                this.$http.post(main.url+"/article/like",
-                    {  'uid': localStorage.getItem('id'),
-                            'aid': row.id,},
-                    {
-                        headers: {'Content-Type':'application/x-www-form-urlencoded'},
-                        emulateJSON: true
-                    }).then(
-                    success=> {
-                        this.$message({type: 'success', message: '已点赞'});
-                        this.init();
-                    }
-                );
-        },
-        favorite(row){
-            this.$http.post(main.url+"/article/favorite",
+
+            this.$http.post(main.url+"/article/like",
                 {  'uid': localStorage.getItem('id'),
                     'aid': row.id,},
                 {
@@ -176,10 +163,13 @@ export default {
                     emulateJSON: true
                 }).then(
                 success=> {
-                    this.$message({type: 'success', message: '已收藏'});
+                    this.$message({type: 'success', message: '已点赞'});
                     this.init();
                 }
             );
+        },
+        favorite(row){
+
         }
     }
 }

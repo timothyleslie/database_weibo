@@ -83,16 +83,16 @@ def login_del():
 
 
 @app.route('/article/list', methods=['POST'])
-def favorite_list():
+def article_list():
     if request.method == "POST":
         uid = request.form.get("uid")
-
+        print('uid:' + str(uid))
         if uid == "0":  # 查询全部公开的收藏数据
-            cursor.execute("select A_ID,U_NAME,A_CONTENT,A_TIME from user, article "
-                           + "order by A_TIME")
+            cursor.execute("select A_ID,U_NAME,A_CONTENT,A_TIME, LIKE_CNT from user, article "
+                           + "where user.U_ID = article.U_ID order by A_TIME desc")
         else:
-            cursor.execute("select  A_ID,U_NAME,A_CONTENT,A_TIME from user, article "
-                           + "where user.U_ID=" + str(uid) + " order by A_TIME desc")
+            cursor.execute("select  A_ID,U_NAME,A_CONTENT,A_TIME, LIKE_CNT from user, article "
+                           + "where article.U_ID=" + str(uid) + " and user.U_ID=article.U_ID order by A_TIME desc")
         data = cursor.fetchall()
         temp = {}
         result = []
@@ -102,6 +102,7 @@ def favorite_list():
                 temp["wname"] = i[1]
                 temp["content"] = i[2]
                 temp["ctime"] = i[3]
+                temp["like_cnt"] = i[4]
                 result.append(temp.copy())  # 特别注意要用copy，否则只是内存的引用
             print("result:", len(data))
             return jsonify(result)
@@ -120,10 +121,10 @@ def article_add():
                            + str(uid) + "\",\""
                            + str(content) + "\")")
             db.commit()  # 提交，使操作生效
-            print("add a new favorite successfully!")
+            print("add a new article successfully!")
             return "1"
         except Exception as e:
-            print("add a new favorite failed:", e)
+            print("add a new article failed:", e)
             db.rollback()  # 发生错误就回滚
             return "-1"
 
@@ -135,10 +136,10 @@ def article_del():
         try:
             cursor.execute("delete from article where A_ID=" + str(id))
             db.commit()
-            print("delete favorite" + str(id) + " successfully!")
+            print("delete article" + str(id) + " successfully!")
             return "1"
         except Exception as e:
-            print("delete the favorite failed:", e)
+            print("delete the article failed:", e)
             db.rollback()  # 发生错误就回滚
             return "-1"
 
@@ -187,6 +188,7 @@ def article_like():
             cursor.execute("insert into LIKES(U_ID, A_ID) values (\""
                            + str(uid) + "\",\""
                            + str(aid) + "\")")
+            cursor.execute("update article set LIKE_CNT = LIKE_CNT + 1 where A_ID =" + str(aid))
             db.commit()  # 提交，使操作生效
             print("add a new like successfully!")
             return "1"
@@ -194,6 +196,53 @@ def article_like():
             print("add a new like failed:", e)
             db.rollback()  # 发生错误就回滚
             return "-1"
+
+
+@app.route('/article/favorite', methods=['POST'])
+def article_favorite():
+    if request.method == "POST":
+        uid = request.form.get("uid")
+        aid = request.form.get("aid")
+        try:
+            cursor.execute("insert into favorite(U_ID, A_ID) values (\""
+                           + str(uid) + "\",\""
+                           + str(aid) + "\")")
+            cursor.execute("update article set FAVORITE_CNT = FAVORITE_CNT + 1 where A_ID =" + str(aid))
+            db.commit()  # 提交，使操作生效
+            print("add a new favorite successfully!")
+            return "1"
+        except Exception as e:
+            print("add a new like failed:", e)
+            db.rollback()  # 发生错误就回滚
+            return "-1"
+
+
+@app.route('/favorite/list', methods=['POST'])
+def favorite_list():
+    if request.method == "POST":
+        uid = request.form.get("uid")
+        print(uid)
+        cursor.execute("select  favorite.A_ID, U_NAME,A_CONTENT,A_TIME, LIKE_CNT, FAVORITE_CNT from  user, article, favorite " +
+                       "where favorite.U_ID=" + str(uid) + " and user.U_ID=favorite.U_ID and article.A_ID = favorite.A_ID order by A_TIME desc")
+        # cursor.execute("select  favorite.A_ID, U_NAME,A_CONTENT,A_TIME, LIKE_CNT from  user, article, favorite " +
+        #                "where favorite.U_ID=4 and user.U_ID=favorite.U_ID and article.A_ID = favorite.A_ID order by A_TIME desc")
+        data = cursor.fetchall()
+        temp = {}
+        result = []
+        if (data != None):
+            for i in data:
+                temp["id"] = i[0]
+                temp["wname"] = i[1]
+                temp["content"] = i[2]
+                temp["ctime"] = i[3]
+                temp["like_cnt"] = i[4]
+                result.append(temp.copy())  # 特别注意要用copy，否则只是内存的引用
+            print("result:", len(data))
+            return jsonify(result)
+        else:
+            print("result: NULL")
+            return jsonify([])
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=9090)
