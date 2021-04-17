@@ -21,5 +21,5 @@ new Vue({
 }).$mount('#app');
 
 export default{ //后端服务器的IP地址
-    url: "http://127.0.0.1:9090"
+    url: "http://10.250.222.149:9090"
 }

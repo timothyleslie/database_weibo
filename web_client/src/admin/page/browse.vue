@@ -7,6 +7,7 @@
             </el-breadcrumb>
         </div>
         <div>
+            <el-button type="primary" @click="search()" align="center">搜索文章</el-button>
             <el-table :data="data" border style="width: 90%" ref="multipleTable" >
                 <el-table-column label="ID" prop="id" width="80px" ></el-table-column>
                 <el-table-column label="作者" prop="wname" width="100px" ></el-table-column>
@@ -31,12 +32,12 @@
             :visible.sync="dialogFormVisibleed1">
             <div class="form-box">
                 <el-form :model="form" :rules="rules" ref="form" label-width="150px">
-                    <el-form-item label="内容" prop="content">
-                        <el-input v-model="form.content" placeholder="请输入微博内容"></el-input>
+                    <el-form-item label="搜索" prop="content">
+                        <el-input v-model="form.content" placeholder="请输入微博的部分内容"></el-input>
                     </el-form-item>
                     <el-form-item style="text-align: center" >
                         <el-button @click="dialogFormVisibleed1 = false" >取消</el-button>
-                        <el-button type="primary" @click="addnew(form)">添加</el-button>
+                        <el-button type="primary" @click="addnew(form)">搜索</el-button>
                     </el-form-item>
                 </el-form>
             </div>
@@ -121,35 +122,17 @@ export default {
                 }
             )
         },
-        addfavorite(){this.dialogFormVisibleed1=true},
-        addnew(form){ //添加新收藏
+        search(){this.dialogFormVisibleed1=true},
+        addnew(form){ //搜索
             // if(this.form.wname==="")
             //     this.$message({type: 'error', message: '网站名称！'});
             if(this.form.content==="")
-                this.$message({type: 'error', message: '微博内容不能为空！'});
+                this.$message({type: 'error', message: '搜索内容不能为空！'});
                 // else if(this.form.type==="")
             //     this.$message({type: 'error', message: '请设置权限！'});
             else{
-                this.$http.post(main.url+"/article/add",
-                    {
-                        'uid': localStorage.getItem('id'),
-                        'content': this.form.content,
-                    },
-                    {
-                        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-                        emulateJSON: true
-                    }).then(
-                    success => {
-                        this.$message({type: 'success', message: '添加成功'});
-                        this.form = {
-                            id: '',
-                            wname:'',
-                            wurl:'',
-                            type:''
-                        };
-                        this.init();
-                    }
-                );
+                localStorage.setItem('search_content', form.content);
+                this.$router.push('/search');
                 this.dialogFormVisibleed1 = false;
             }
         },

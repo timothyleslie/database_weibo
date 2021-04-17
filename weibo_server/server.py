@@ -23,7 +23,18 @@ def login_add():
                            + str(username) + "\",\"" + str(password) + "\")")
             db.commit()  # 提交，使操作生效
             print("add a new user successfully!")
-            return "1"
+            cursor.execute("select U_ID, U_NAME from user where U_NAME=\""
+                       + str(username) + "\" and U_PASSWORD=\"" + str(password) + "\"")
+            data = cursor.fetchone()
+            if (data != None):
+                print("result:", data)
+                jsondata = {"id": str(data[0]), "username": str(data[1]),
+                            }
+                return jsonify(jsondata)
+            else:
+                print("result: NULL")
+                jsondata = {}
+            return jsonify(jsondata)
         except Exception as e:
             print("add a new user failed:", e)
             db.rollback()  # 发生错误就回滚
@@ -121,6 +132,32 @@ def article_follow():
                        + "where article.U_ID in "
                          "(select CONCERNED_U_ID from concern where CONCERN_U_ID= " + str(uid) + ")"
                        + " and user.U_ID=article.U_ID order by A_TIME desc")
+        data = cursor.fetchall()
+        temp = {}
+        result = []
+        if (data != None):
+            for i in data:
+                temp["id"] = i[0]
+                temp["wname"] = i[1]
+                temp["content"] = i[2]
+                temp["ctime"] = i[3]
+                temp["like_cnt"] = i[4]
+                result.append(temp.copy())  # 特别注意要用copy，否则只是内存的引用
+            print("result:", len(data))
+            return jsonify(result)
+        else:
+            print("result: NULL")
+            return jsonify([])
+
+
+@app.route('/article/search', methods=['POST'])
+def article_search():
+    if request.method == "POST":
+        content = request.form.get("content")
+        print('content:' + str(content))
+
+        cursor.execute("select  A_ID,U_NAME,A_CONTENT,A_TIME, LIKE_CNT from user, article "
+                       + "where article.U_ID=user.U_ID and article.A_CONTENT like '%" + str(content) + "%\'")
         data = cursor.fetchall()
         temp = {}
         result = []
@@ -418,7 +455,8 @@ def private_msg_list():
         print('uid:' + str(uid))
 
         cursor.execute("select  u1.U_NAME, u2.U_NAME, MSG_CONTENT, MSG_TIME from user u1, user u2, private_message "
-                       + "where u1.U_ID=SENDER_U_ID and u2.U_ID=RECEIVER_U_ID and (SENDER_U_ID=" + str(uid) + " or RECEIVER_U_ID=" + str(uid) + ") order by MSG_TIME desc")
+                       + "where u1.U_ID=SENDER_U_ID and u2.U_ID=RECEIVER_U_ID and (SENDER_U_ID=" + str(
+            uid) + " or RECEIVER_U_ID=" + str(uid) + ") order by MSG_TIME desc")
         data = cursor.fetchall()
         temp = {}
         result = []

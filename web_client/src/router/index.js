@@ -58,6 +58,10 @@ export default new Router({
                     path: '/private_message',
                     component: resolve => require(['../admin/page/private_message.vue'], resolve)
                 },
+                {
+                    path: '/search',
+                    component: resolve => require(['../admin/page/search.vue'], resolve)
+                },
             ]
         }
     ]

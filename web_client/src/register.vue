@@ -62,10 +62,11 @@ export default {
                         emulateJSON: true
                     }).then(
                     success => {
-                        if(success.data == "1"){
+                        if(success.data.id != null){
                             this.$message({type: 'success', message: '登录成功'});
                             localStorage.setItem('username',this.ruleForm.username);
                             localStorage.setItem('id',success.data.id);
+                            // this.$message({type: 'success', message: localStorage.getItem('id')});
                             this.$router.push({ path: '/admin' });
                             this.ruleForm.username='';
                         }else{
