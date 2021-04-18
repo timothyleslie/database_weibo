@@ -2,19 +2,19 @@
     <div>
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-setting"></i> 管理</el-breadcrumb-item>
-                <el-breadcrumb-item>收藏列表</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-setting"></i> 浏览</el-breadcrumb-item>
+                <el-breadcrumb-item>全部微博</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div>
             <el-button type="primary" @click="search()" align="center">搜索文章</el-button>
-            <el-table :data="data" border style="width: 90%" ref="multipleTable" >
-                <el-table-column label="ID" prop="id" width="80px" ></el-table-column>
+            <el-table :data="data" border style="width: 100%" ref="multipleTable" >
+                <el-table-column label="文章ID" prop="id" width="80px" ></el-table-column>
                 <el-table-column label="作者" prop="wname" width="100px" ></el-table-column>
                 <el-table-column label="内容" prop="content" width="300px" ></el-table-column>
                 <el-table-column label="发表时间" prop="ctime" width="250px" ></el-table-column>
                 <el-table-column label="点赞数" prop="like_cnt" width="70px" ></el-table-column>
-                <el-table-column label="转发数" prop="transmit_cnt" width="70px" ></el-table-column>
+                <el-table-column label="收藏数" prop="favorite_cnt" width="70px" ></el-table-column>
                 <el-table-column label="评论数" prop="comment_cnt" width="70px" ></el-table-column>
                 <el-table-column>
                     <template slot-scope="scope" width="100px">
@@ -28,7 +28,7 @@
         </div>
         <el-dialog
             width="30%"
-            title="添加微博"
+            title="搜索微博"
             :visible.sync="dialogFormVisibleed1">
             <div class="form-box">
                 <el-form :model="form" :rules="rules" ref="form" label-width="150px">

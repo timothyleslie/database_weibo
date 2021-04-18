@@ -2,8 +2,8 @@
     <div>
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-setting"></i> 管理</el-breadcrumb-item>
-                <el-breadcrumb-item>关注列表</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-setting"></i> 浏览</el-breadcrumb-item>
+                <el-breadcrumb-item>所有用户</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div>

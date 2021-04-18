@@ -2,12 +2,12 @@
     <div>
         <div class="crumbs">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item><i class="el-icon-setting"></i> 管理</el-breadcrumb-item>
-                <el-breadcrumb-item>收藏列表</el-breadcrumb-item>
+                <el-breadcrumb-item><i class="el-icon-setting"></i> 浏览</el-breadcrumb-item>
+                <el-breadcrumb-item>你收到的私信</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div>
-            <el-table :data="data" border style="width: 90%" ref="multipleTable" >
+            <el-table :data="data" border style="width: 60%" ref="multipleTable" >
                 <el-table-column label="发信者" prop="sender_name" width="80px" ></el-table-column>
                 <el-table-column label="收信者" prop="receiver_name" width="100px" ></el-table-column>
                 <el-table-column label="内容" prop="content" width="300px" ></el-table-column>

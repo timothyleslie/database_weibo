@@ -53,7 +53,7 @@
                         {
                             icon: 'el-icon-setting',
                             index: 'focus_admin',
-                            title: '管理关注',
+                            title: '所有用户',
                         },
                         {
                             icon: 'el-icon-setting',

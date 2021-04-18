@@ -3,7 +3,7 @@
         <div class="crumbs">
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item><i class="el-icon-setting"></i> 管理</el-breadcrumb-item>
-                <el-breadcrumb-item>收藏列表</el-breadcrumb-item>
+                <el-breadcrumb-item>你发表的微博</el-breadcrumb-item>
             </el-breadcrumb>
         </div>
         <div>

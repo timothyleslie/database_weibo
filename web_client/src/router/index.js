@@ -26,10 +26,6 @@ export default new Router({
                     path: '/account_admin',
                     component: resolve => require(['../admin/page/account_admin.vue'], resolve)
                 },
-                // {
-                //     path: '/favorite_admin',
-                //     component: resolve => require(['../admin/page/favorite_admin.vue'], resolve)
-                // },
                 {
                     path: '/article_admin',
                     component: resolve => require(['../admin/page/article_admin.vue'], resolve)

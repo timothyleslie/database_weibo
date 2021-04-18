@@ -8,13 +8,13 @@
         </div>
         <div>
             <el-button type="primary" @click="search()" align="center">搜索文章</el-button>
-            <el-table :data="data" border style="width: 90%" ref="multipleTable" >
+            <el-table :data="data" border style="width: 100%" ref="multipleTable" >
                 <el-table-column label="ID" prop="id" width="80px" ></el-table-column>
                 <el-table-column label="作者" prop="wname" width="100px" ></el-table-column>
                 <el-table-column label="内容" prop="content" width="300px" ></el-table-column>
                 <el-table-column label="发表时间" prop="ctime" width="250px" ></el-table-column>
                 <el-table-column label="点赞数" prop="like_cnt" width="70px" ></el-table-column>
-                <el-table-column label="转发数" prop="transmit_cnt" width="70px" ></el-table-column>
+                <el-table-column label="收藏数" prop="favorite_cnt" width="70px" ></el-table-column>
                 <el-table-column label="评论数" prop="comment_cnt" width="70px" ></el-table-column>
                 <el-table-column>
                     <template slot-scope="scope" width="100px">
