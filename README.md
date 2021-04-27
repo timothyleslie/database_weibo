@@ -13,7 +13,7 @@ $ npm run dev #running in localhost:81
 
 
 ```bash
-$ cd web_server
+$ cd weibo_server
 $ python server.py # running in localhost:9090
 ```
 
